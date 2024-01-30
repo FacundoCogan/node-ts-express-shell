@@ -31,4 +31,14 @@ const userSchema = new mongoose.Schema({ // reglas de como queremos grabar la in
 
 });
 
+userSchema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform: function(doc, ret, options) {
+        delete ret._id;
+        delete ret.password;
+        
+    }
+});
+
 export const UserModel = mongoose.model('User', userSchema);
